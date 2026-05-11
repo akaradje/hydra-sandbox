@@ -3,7 +3,7 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "hydra-sandbox"
+name = "hydra-pysandbox"
 version = "0.1.0"
 description = "Hardened Python sandbox for running untrusted code — subprocess, seccomp, landlock strategies with Z3 formal verification."
 readme = "README.md"
