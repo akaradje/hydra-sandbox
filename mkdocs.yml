@@ -1,0 +1,50 @@
+site_name: hydra-sandbox
+site_description: Hardened Python execution sandbox
+repo_url: https://github.com/akaradje/hydra-sandbox
+
+theme:
+  name: material
+  palette:
+    - scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  features:
+    - navigation.instant
+    - navigation.tracking
+    - content.code.copy
+
+plugins:
+  - search
+  - mkdocstrings:
+      handlers:
+        python:
+          options:
+            show_source: false
+            heading_level: 3
+
+markdown_extensions:
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.superfences
+  - admonition
+  - pymdownx.details
+
+nav:
+  - Home: index.md
+  - Quickstart: quickstart.md
+  - Threat Model: threat-model.md
+  - API Reference: api.md
+  - Strategies: strategies.md
+  - Z3 Verification: verify.md
+  - Benchmarks: benchmarks.md
+  - Comparison: comparison.md
+  - FAQ: faq.md
