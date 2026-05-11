@@ -35,6 +35,7 @@ class VerifiedResult:
     verification_valid: bool
     verification_result: Any | None  # VerificationResult from verify
     z3_proof_hash: str
+    proof_annotation: Any | None = None  # ProofAnnotation from proof module
     error: str | None = None
 
 
@@ -68,8 +69,11 @@ def verified_execute(
     """
     from hydra_sandbox.executor import execute_python
 
+    from hydra_sandbox.proof import ProofAnnotation
+
     verification_result = None
     verification_valid = True
+    proof_annotation = None
     error: str | None = None
 
     # --- Phase 1: Z3 verification (optional) ---
@@ -77,8 +81,24 @@ def verified_execute(
         try:
             verification_result = _verify_from_spec(function_name, spec)
             verification_valid = verification_result.valid
+
+            # Build proof annotation regardless of outcome
+            z3_status = "VALID" if verification_valid else "INVALID"
+            precond = spec.get("precondition", "True")
+            postcond = spec.get("postcondition", "True")
+            proof_annotation = ProofAnnotation.create(
+                function_name=function_name,
+                precondition=precond,
+                postcondition=postcond,
+                z3_result=z3_status,
+                counterexample=(
+                    _serialize_counterexample(verification_result.counterexample)
+                    if not verification_valid and verification_result.counterexample is not None
+                    else None
+                ),
+            )
+
             if not verification_valid:
-                # Build proof hash from the failed verification
                 proof_hash = _build_proof_hash(
                     code, function_name, spec, verification_result
                 )
@@ -88,6 +108,7 @@ def verified_execute(
                     verification_valid=False,
                     verification_result=verification_result,
                     z3_proof_hash=proof_hash,
+                    proof_annotation=proof_annotation,
                     error="Verification failed — execution skipped.",
                 )
         except ImportError as exc:
@@ -115,6 +136,7 @@ def verified_execute(
         verification_valid=verification_valid,
         verification_result=verification_result,
         z3_proof_hash=proof_hash,
+        proof_annotation=proof_annotation,
         error=error,
     )
 
@@ -207,6 +229,16 @@ def _get_z3():
             "hydra-pysandbox.verified_execute requires z3-solver. "
             "Install with: pip install hydra-pysandbox[verify]"
         ) from exc
+
+
+def _serialize_counterexample(ce: Any) -> dict[str, Any] | None:
+    """Convert a Z3 model/counterexample to a plain dict for JSON."""
+    if ce is None:
+        return None
+    try:
+        return dict(ce)
+    except (TypeError, ValueError):
+        return {"raw": str(ce)}
 
 
 def _build_proof_hash(

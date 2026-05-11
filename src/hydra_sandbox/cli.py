@@ -44,6 +44,10 @@ def main(argv: list[str] | None = None) -> None:
     # ---- doctor ----
     sub.add_parser("doctor", help="Report available strategies and isolation level")
 
+    # ---- verify-annotation ----
+    va_parser = sub.add_parser("verify-annotation", help="Verify a proof annotation in a Python file")
+    va_parser.add_argument("file", type=Path, help="Python file with proof annotation to verify")
+
     args = parser.parse_args(argv)
 
     if args.command == "run":
@@ -54,6 +58,8 @@ def main(argv: list[str] | None = None) -> None:
         _cmd_bench()
     elif args.command == "doctor":
         _cmd_doctor()
+    elif args.command == "verify-annotation":
+        _cmd_verify_annotation(args)
 
 
 def _cmd_run(args) -> None:
@@ -130,6 +136,30 @@ def _cmd_doctor() -> None:
             print(f"Smoke test: FAILED ({result.stderr})")
     except Exception as exc:
         print(f"Smoke test: ERROR ({exc})")
+
+
+def _cmd_verify_annotation(args) -> None:
+    from hydra_sandbox.proof import parse_proof_annotation, verify_proof_annotation
+
+    code = args.file.read_text(encoding="utf-8")
+    parsed = parse_proof_annotation(code)
+    if parsed is None:
+        print("No proof annotation found in the file.")
+        sys.exit(1)
+
+    print(f"Function:     {parsed.function_name}")
+    print(f"Precondition: {parsed.precondition}")
+    print(f"Postcondition:{parsed.postcondition}")
+    print(f"Z3 result:    {parsed.z3_result}")
+    print(f"Proof hash:   {parsed.proof_hash}")
+    print(f"Verified at:  {parsed.verified_at}")
+    print()
+
+    if verify_proof_annotation(code):
+        print("Result: VALID — proof annotation is intact.")
+    else:
+        print("Result: TAMPERED — proof hash does not match.")
+        sys.exit(1)
 
 
 if __name__ == "__main__":
