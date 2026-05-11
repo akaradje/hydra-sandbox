@@ -7,13 +7,19 @@ verification, and optional Z3 formal specification checking.
 """
 
 from hydra_sandbox._version import __version__
+from hydra_sandbox.audit import AuditEntry, AuditLog
 from hydra_sandbox.executor import ExecutionResult, execute_python
 from hydra_sandbox.guard import build_guarded_preamble
 from hydra_sandbox.static_analyzer import extract_expected_signature, verify_ast_signature
+from hydra_sandbox.verified_executor import VerifiedResult, verified_execute
 
 __all__ = [
     "execute_python",
     "ExecutionResult",
+    "verified_execute",
+    "VerifiedResult",
+    "AuditLog",
+    "AuditEntry",
     "verify_ast_signature",
     "extract_expected_signature",
     "build_guarded_preamble",
