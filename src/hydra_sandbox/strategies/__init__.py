@@ -11,6 +11,8 @@ from __future__ import annotations
 import logging
 from typing import Any
 
+from hydra_sandbox._version import __version__  # noqa: F401 — re-export for debugging
+
 from .subprocess_strategy import SubprocessStrategy
 from .seccomp_strategy import SeccompStrategy
 from .landlock_strategy import LandlockStrategy

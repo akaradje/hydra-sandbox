@@ -7,6 +7,7 @@ When prepended to sandbox code, this snippet installs itself as
 
 from __future__ import annotations
 
+import sys
 from typing import Iterable
 
 # Modules and functions permanently blocked from sandbox code.

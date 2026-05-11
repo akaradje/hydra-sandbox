@@ -193,7 +193,7 @@ def execute_python(
                 success=False,
                 stdout=stdout,
                 stderr=stderr,
-                exit_code=None,
+                exit_code=-9,  # SIGKILL equivalent
                 timed_out=True,
                 exception_info=f"Subprocess timed out after {timeout} seconds",
                 cpu_time=None,
