@@ -1,5 +1,11 @@
 # hydra-sandbox
 
+[![PyPI](https://img.shields.io/pypi/v/hydra-sandbox)](https://pypi.org/project/hydra-sandbox/)
+[![Python](https://img.shields.io/pypi/pyversions/hydra-sandbox)](https://pypi.org/project/hydra-sandbox/)
+[![License](https://img.shields.io/pypi/l/hydra-sandbox)](https://github.com/akaradje/hydra-sandbox/blob/main/LICENSE)
+[![Tests](https://img.shields.io/github/actions/workflow/status/akaradje/hydra-sandbox/test.yml?label=tests)](https://github.com/akaradje/hydra-sandbox/actions)
+[![Coverage](https://img.shields.io/codecov/c/github/akaradje/hydra-sandbox)](https://codecov.io/gh/akaradje/hydra-sandbox)
+
 Hardened Python execution sandbox for running untrusted code.
 
 Built for developers building LLM agents, code review bots, and online
@@ -103,6 +109,22 @@ See [SECURITY.md](SECURITY.md) for the threat model and supported versions.
 The `subprocess` strategy provides Python-level isolation suitable for
 most use cases. For production deployments handling truly untrusted code,
 use `seccomp+landlock` on a Linux host with additional hardening.
+
+## Telemetry
+
+hydra-sandbox includes optional, **opt-in** telemetry. It is **disabled by
+default** and sends nothing unless you explicitly enable it.
+
+When enabled, it sends exactly two data points ONCE per process lifetime:
+- Package version (`__version__`)
+- Strategy selected (`subprocess`, `seccomp`, etc.)
+
+No user code, no environment variables, no PII, no IP address logging.
+
+```bash
+export HYDRA_SANDBOX_TELEMETRY=1   # opt in
+export HYDRA_SANDBOX_NO_TELEMETRY=1  # explicitly opt out (default)
+```
 
 ## License
 

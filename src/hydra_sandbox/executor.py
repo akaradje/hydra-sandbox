@@ -120,6 +120,14 @@ def execute_python(
     """
     strat = get_strategy(strategy)
 
+    # Opt-in telemetry ping (no user code, no env — just version + strategy)
+    try:
+        from hydra_sandbox.telemetry import _ping_once
+
+        _ping_once(strategy)
+    except Exception:
+        pass
+
     # Build sandboxed code: network block preamble + import guard + user code
     preamble_lines = strat.prepare_preamble(allow_network)
     full_code = "\n".join(preamble_lines) + "\n" + code
