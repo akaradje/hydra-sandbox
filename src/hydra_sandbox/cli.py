@@ -1,12 +1,12 @@
 """
-CLI entry point for hydra-sandbox.
+CLI entry point for hydra-pysandbox.
 
 Usage::
 
-    hydra-sandbox run script.py --timeout 10 --strategy seccomp
-    hydra-sandbox check script.py --expect-function compute --expect-args x y
-    hydra-sandbox bench
-    hydra-sandbox doctor
+    hydra-pysandbox run script.py --timeout 10 --strategy seccomp
+    hydra-pysandbox check script.py --expect-function compute --expect-args x y
+    hydra-pysandbox bench
+    hydra-pysandbox doctor
 """
 
 from __future__ import annotations
@@ -18,7 +18,7 @@ from pathlib import Path
 
 def main(argv: list[str] | None = None) -> None:
     parser = argparse.ArgumentParser(
-        prog="hydra-sandbox",
+        prog="hydra-pysandbox",
         description="Hardened Python execution sandbox CLI",
     )
     sub = parser.add_subparsers(dest="command", required=True)

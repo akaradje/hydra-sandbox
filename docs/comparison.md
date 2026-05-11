@@ -1,10 +1,10 @@
 # Comparison
 
-How hydra-sandbox compares to alternatives.
+How hydra-pysandbox compares to alternatives.
 
-## hydra-sandbox vs alternatives
+## hydra-pysandbox vs alternatives
 
-| Feature | hydra-sandbox | e2b | Firejail | Naive subprocess |
+| Feature | hydra-pysandbox | e2b | Firejail | Naive subprocess |
 |---------|:---:|:---:|:---:|:---:|
 | Cross-platform | Yes | No (cloud) | Linux only | Yes |
 | No external service | Yes | No | Yes | Yes |
@@ -25,8 +25,8 @@ How hydra-sandbox compares to alternatives.
 isolation via Firecracker microVMs but requires an internet connection,
 API key, and paid plan for production use.
 
-**hydra-sandbox** runs entirely locally with no external dependencies.
-Choose hydra-sandbox if you need offline execution, zero latency, or
+**hydra-pysandbox** runs entirely locally with no external dependencies.
+Choose hydra-pysandbox if you need offline execution, zero latency, or
 data privacy guarantees. Choose e2b if you need microVM isolation
 without managing Linux kernel features yourself.
 
@@ -35,7 +35,7 @@ without managing Linux kernel features yourself.
 [Firejail](https://github.com/netblue30/firejail) is a Linux SUID
 sandbox that uses namespaces, seccomp, and capabilities.
 
-**hydra-sandbox** wraps the same kernel features (seccomp, landlock)
+**hydra-pysandbox** wraps the same kernel features (seccomp, landlock)
 with a Python-native API, cross-platform fallback, and LLM-tooling
 conveniences (AST check, Z3 proof, audit trail). It does not require
 SUID or root.
@@ -43,7 +43,7 @@ SUID or root.
 ### vs naive subprocess
 
 Running `subprocess.run([sys.executable, "-c", code])` has none of
-the protections hydra-sandbox provides:
+the protections hydra-pysandbox provides:
 
 - No import blocking (can `import subprocess` and spawn a shell)
 - No network isolation
@@ -51,7 +51,7 @@ the protections hydra-sandbox provides:
 - No resource limits
 - No output truncation
 
-hydra-sandbox's default `subprocess` strategy adds all of these with
+hydra-pysandbox's default `subprocess` strategy adds all of these with
 ~10-18 ms overhead.
 
 ## When to use which strategy

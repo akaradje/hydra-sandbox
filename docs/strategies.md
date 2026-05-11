@@ -33,7 +33,7 @@ even if the import guard is bypassed.
 **Setup**:
 ```bash
 apt install libseccomp-dev
-pip install hydra-sandbox[seccomp]
+pip install hydra-pysandbox[seccomp]
 ```
 
 ### `landlock` (Linux 5.13+)
@@ -49,7 +49,7 @@ Adds kernel-level filesystem access control:
 
 **Setup**:
 ```bash
-pip install hydra-sandbox[landlock]
+pip install hydra-pysandbox[landlock]
 ```
 
 ### `seccomp+landlock` (strongest)
@@ -85,5 +85,5 @@ print(available_strategies())
 Or via CLI:
 
 ```bash
-hydra-sandbox doctor
+hydra-pysandbox doctor
 ```

@@ -10,7 +10,7 @@ import pytest
 
 from hydra_sandbox import VerifiedResult, verified_execute
 
-pytest.importorskip("z3", reason="z3-solver not installed — pip install hydra-sandbox[verify]")
+pytest.importorskip("z3", reason="z3-solver not installed — pip install hydra-pysandbox[verify]")
 
 
 def test_valid_spec_and_code_both_pass() -> None:

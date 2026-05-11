@@ -204,8 +204,8 @@ def _get_z3():
         return z3
     except ImportError as exc:
         raise ImportError(
-            "hydra-sandbox.verified_execute requires z3-solver. "
-            "Install with: pip install hydra-sandbox[verify]"
+            "hydra-pysandbox.verified_execute requires z3-solver. "
+            "Install with: pip install hydra-pysandbox[verify]"
         ) from exc
 
 

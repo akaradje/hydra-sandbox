@@ -7,7 +7,7 @@ outside the designated area.
 
 **Prerequisites**::
 
-    pip install hydra-sandbox[landlock]
+    pip install hydra-pysandbox[landlock]
 """
 
 from __future__ import annotations

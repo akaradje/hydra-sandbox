@@ -1,17 +1,17 @@
-hydra-sandbox — hardened Python sandbox for LLM-generated code
+hydra-pysandbox — hardened Python sandbox for LLM-generated code
 
 1/ I built a Python sandbox that actually blocks attacks. Not just a
 timeout — import guards, seccomp syscall filtering, landlock FS sandbox,
 and 20+ escape vectors tested.
 
-Open source. Zero deps. pip install hydra-sandbox.
+Open source. Zero deps. pip install hydra-pysandbox.
 github.com/akaradje/hydra-sandbox
 
 2/ The problem: every LLM agent runs model-generated code. Most tools
 use exec() or bare subprocess. If the model hallucinates
 `os.system('dangerous')` — that runs on your HOST.
 
-hydra-sandbox runs it in a hardened child process instead.
+hydra-pysandbox runs it in a hardened child process instead.
 
 3/ Import guard blocks dangerous modules at the find_spec level:
 • import subprocess → PermissionError
@@ -47,4 +47,5 @@ export_csv() for compliance.
 the default PythonREPL tool. Examples in ./examples/
 
 89 tests, 0 failures. Python 3.10+ on Linux/macOS/Windows.
-Try it: pip install hydra-sandbox
+Try it: pip install hydra-pysandbox
+PyPI: https://pypi.org/project/hydra-pysandbox/

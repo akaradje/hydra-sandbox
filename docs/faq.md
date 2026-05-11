@@ -2,7 +2,7 @@
 
 ## General
 
-### Is hydra-sandbox safe for production?
+### Is hydra-pysandbox safe for production?
 
 The `subprocess` strategy provides Python-level isolation suitable for
 LLM agent tools and code review bots. For truly untrusted code (e.g.,
@@ -38,7 +38,7 @@ provide defense-in-depth for the cases where the import guard can't help.
 
 ### How do I verify my deployment?
 
-Run `hydra-sandbox doctor` to see which strategies are available.
+Run `hydra-pysandbox doctor` to see which strategies are available.
 Run `pytest tests/test_escape_attempts.py -v` to validate that
 known bypass vectors are blocked for your configuration.
 

@@ -1,4 +1,4 @@
-Show HN: hydra-sandbox — hardened Python sandbox for LLM-generated code
+Show HN: Hydra Sandbox – run untrusted/LLM-generated Python safely (Z3 + 3-layer isolation)
 
 I built an open-source Python sandbox that lets you safely execute
 untrusted code. It's designed for LLM agents, code review bots, and
@@ -26,8 +26,9 @@ What makes it different from a naive subprocess:
 
 Zero required dependencies. Python 3.10+ on Linux/macOS/Windows.
 
+PyPI: https://pypi.org/project/hydra-pysandbox/
 GitHub: https://github.com/akaradje/hydra-sandbox
-Docs: https://akaradje.github.io/hydra-sandbox
+Docs: https://akaradje.github.io/hydra-pysandbox
 
 I'd love feedback from anyone running untrusted code in production.
 What am I missing? What would make you trust a sandbox for your use case?

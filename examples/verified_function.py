@@ -4,7 +4,7 @@ Example: Z3 formal verification + sandbox execution in one call.
 Demonstrates ``verified_execute`` — prove correctness with Z3,
 then run in the sandbox with a tamper-evident proof hash.
 
-Requirements: pip install hydra-sandbox[verify]
+Requirements: pip install hydra-pysandbox[verify]
 """
 
 from hydra_sandbox import verified_execute

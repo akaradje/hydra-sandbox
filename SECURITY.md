@@ -8,7 +8,7 @@
 
 ## Threat Model
 
-hydra-sandbox is designed to protect against:
+hydra-pysandbox is designed to protect against:
 
 1. **Malicious code execution** — code that attempts to access the filesystem,
    network, or spawn subprocesses

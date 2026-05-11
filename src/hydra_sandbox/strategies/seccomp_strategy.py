@@ -9,7 +9,7 @@ dangerous ones (execve, fork, socket, ptrace, etc.).
 
     apt install libseccomp-dev   # Debian/Ubuntu
     brew install libseccomp      # macOS (no kernel support; for dev only)
-    pip install hydra-sandbox[seccomp]
+    pip install hydra-pysandbox[seccomp]
 """
 
 from __future__ import annotations

@@ -119,7 +119,7 @@ description. Returns `None` if no signature could be parsed.
 
 ## Z3 verification (optional)
 
-Requires: `pip install hydra-sandbox[verify]`
+Requires: `pip install hydra-pysandbox[verify]`
 
 ### `check_spec()`
 

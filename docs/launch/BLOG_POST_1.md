@@ -57,7 +57,7 @@ Running untrusted Python safely isn't one thing — it's layers:
 Most tools implement maybe #6. A few add #1 (by parsing imports with
 regex — trivially bypassable). Almost none implement #7-8.
 
-## Enter hydra-sandbox
+## Enter hydra-pysandbox
 
 I built an open-source package that implements all eight layers:
 
@@ -90,7 +90,8 @@ If you're building LLM tools, please stop using bare `exec()`. It's not
 a question of if a model will generate dangerous code — it's when. Your
 users deserve better than "trust the model."
 
-hydra-sandbox is MIT-licensed, zero required dependencies, and works on
-Linux, macOS, and Windows. pip install hydra-sandbox.
+hydra-pysandbox is MIT-licensed, zero required dependencies, and works on
+Linux, macOS, and Windows. pip install hydra-pysandbox.
 
-[Link to GitHub repo]
+PyPI: https://pypi.org/project/hydra-pysandbox/
+GitHub: https://github.com/akaradje/hydra-sandbox

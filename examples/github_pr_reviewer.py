@@ -4,7 +4,7 @@ Example: GitHub PR review bot that safely executes suggested code.
 Sketch of a bot that comments on PRs, extracts Python code blocks from
 the diff, runs them in the sandbox, and reports results.
 
-Requirements: pip install hydra-sandbox
+Requirements: pip install hydra-pysandbox
 """
 
 import hashlib

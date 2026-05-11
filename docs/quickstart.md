@@ -5,7 +5,7 @@
 ## 1. Install
 
 ```bash
-pip install hydra-sandbox
+pip install hydra-pysandbox
 ```
 
 ## 2. Run untrusted code
@@ -67,16 +67,16 @@ def safe_python_tool(code: str) -> str:
 
 ```bash
 # Run a Python file
-hydra-sandbox run script.py --timeout 10 --strategy auto
+hydra-pysandbox run script.py --timeout 10 --strategy auto
 
 # Check function signature
-hydra-sandbox check script.py --expect-function add --expect-args x y
+hydra-pysandbox check script.py --expect-function add --expect-args x y
 
 # Show available strategies
-hydra-sandbox doctor
+hydra-pysandbox doctor
 
 # Run benchmarks
-hydra-sandbox bench
+hydra-pysandbox bench
 ```
 
 ## Next steps

@@ -1,10 +1,10 @@
 """
-Example: Using hydra-sandbox as a LangChain / LlamaIndex tool.
+Example: Using hydra-pysandbox as a LangChain / LlamaIndex tool.
 
 This sketch shows how to wrap ``execute_python`` as a tool that an
 LLM agent can call to safely run generated or user-submitted code.
 
-Requirements: pip install hydra-sandbox langchain
+Requirements: pip install hydra-pysandbox langchain
 """
 
 from hydra_sandbox import execute_python

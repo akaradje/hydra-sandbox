@@ -1,11 +1,11 @@
 r/LangChain: Safe Python code execution for your agents
 
-I built hydra-sandbox after getting frustrated with how most LangChain
+I built hydra-pysandbox after getting frustrated with how most LangChain
 tools handle Python execution. The default PythonREPL tool in LangChain
 uses exec() in the same process. If the model generates `import os;
 os.system('rm -rf /')`, that runs directly on your host.
 
-hydra-sandbox gives you a drop-in replacement that actually isolates
+hydra-pysandbox gives you a drop-in replacement that actually isolates
 the code:
 
 ```python
@@ -54,4 +54,5 @@ security. What would make this a no-brainer for your LangChain projects?
 Examples: ./examples/ directory has working LangChain integration sketch
 plus PR reviewer bot and student grader examples.
 
+PyPI: https://pypi.org/project/hydra-pysandbox/
 GitHub: https://github.com/akaradje/hydra-sandbox

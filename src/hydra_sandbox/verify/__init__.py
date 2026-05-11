@@ -3,7 +3,7 @@ Z3 SMT solver integration for formal specification checking.
 
 Provides a specification format with pre-conditions, post-conditions,
 and invariants expressed as Z3 constraints.  Import ``z3`` lazily so
-the base ``hydra-sandbox`` install does not require it.
+the base ``hydra-pysandbox`` install does not require it.
 """
 
 from __future__ import annotations
@@ -40,8 +40,8 @@ def _get_z3():
         return z3
     except ImportError as exc:
         raise ImportError(
-            "hydra-sandbox.verify requires z3-solver. "
-            "Install with: pip install hydra-sandbox[verify]"
+            "hydra-pysandbox.verify requires z3-solver. "
+            "Install with: pip install hydra-pysandbox[verify]"
         ) from exc
 
 

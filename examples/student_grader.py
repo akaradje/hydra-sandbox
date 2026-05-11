@@ -4,7 +4,7 @@ Example: Safely running student-submitted code for automatic grading.
 Extracts the expected function signature and runs a battery of test
 cases in the sandbox, returning a grade and feedback.
 
-Requirements: pip install hydra-sandbox
+Requirements: pip install hydra-pysandbox
 """
 
 from hydra_sandbox import execute_python, extract_expected_signature, verify_ast_signature

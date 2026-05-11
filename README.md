@@ -1,16 +1,37 @@
-# hydra-sandbox
+# hydra-pysandbox
 
-[![PyPI](https://img.shields.io/pypi/v/hydra-sandbox)](https://pypi.org/project/hydra-sandbox/)
-[![Python](https://img.shields.io/pypi/pyversions/hydra-sandbox)](https://pypi.org/project/hydra-sandbox/)
-[![License](https://img.shields.io/pypi/l/hydra-sandbox)](https://github.com/akaradje/hydra-sandbox/blob/main/LICENSE)
-[![Tests](https://img.shields.io/github/actions/workflow/status/akaradje/hydra-sandbox/test.yml?label=tests)](https://github.com/akaradje/hydra-sandbox/actions)
-[![Coverage](https://img.shields.io/codecov/c/github/akaradje/hydra-sandbox)](https://codecov.io/gh/akaradje/hydra-sandbox)
+[![PyPI](https://img.shields.io/pypi/v/hydra-pysandbox.svg)](https://pypi.org/project/hydra-pysandbox/)
+[![Downloads](https://img.shields.io/pypi/dm/hydra-pysandbox.svg)](https://pypi.org/project/hydra-pysandbox/)
+[![Python](https://img.shields.io/pypi/pyversions/hydra-pysandbox.svg)](https://pypi.org/project/hydra-pysandbox/)
+[![License](https://img.shields.io/pypi/l/hydra-pysandbox.svg)](https://github.com/akaradje/hydra-sandbox/blob/main/LICENSE)
+[![Tests](https://img.shields.io/github/actions/workflow/status/akaradje/hydra-pysandbox/test.yml?label=tests)](https://github.com/akaradje/hydra-sandbox/actions)
+[![Coverage](https://img.shields.io/codecov/c/github/akaradje/hydra-pysandbox)](https://codecov.io/gh/akaradje/hydra-pysandbox)
 
 Hardened Python execution sandbox for running untrusted code.
 
 Built for developers building LLM agents, code review bots, and online
 coding platforms who need to execute user-submitted or model-generated
 code without risking the host system.
+
+## 30-second demo
+
+```python
+from hydra_sandbox import execute_python
+
+# This is safe — runs in isolated subprocess with import guard,
+# resource limits, network blocking, and filesystem sandboxing.
+result = execute_python("""
+import os, subprocess  # ← these are BLOCKED by the import guard
+print("hello")
+""", timeout=5)
+
+print(result.success)          # False — blocked imports
+print(result.blocked_imports)  # ['os', 'subprocess']
+
+# Safe code works fine:
+result = execute_python("print(sum(range(1000)))", timeout=5)
+print(result.stdout.strip())   # 499500
+```
 
 ## Features
 
@@ -30,13 +51,13 @@ code without risking the host system.
 ## Installation
 
 ```bash
-pip install hydra-sandbox
+pip install hydra-pysandbox
 
 # With optional dependencies
-pip install hydra-sandbox[verify]       # Z3 formal verification
-pip install hydra-sandbox[seccomp]      # Linux seccomp support
-pip install hydra-sandbox[landlock]     # Linux landlock support
-pip install hydra-sandbox[all]          # everything
+pip install hydra-pysandbox[verify]       # Z3 formal verification
+pip install hydra-pysandbox[seccomp]      # Linux seccomp support
+pip install hydra-pysandbox[landlock]     # Linux landlock support
+pip install hydra-pysandbox[all]          # everything
 ```
 
 ## Quick start
@@ -112,7 +133,7 @@ use `seccomp+landlock` on a Linux host with additional hardening.
 
 ## Telemetry
 
-hydra-sandbox includes optional, **opt-in** telemetry. It is **disabled by
+hydra-pysandbox includes optional, **opt-in** telemetry. It is **disabled by
 default** and sends nothing unless you explicitly enable it.
 
 When enabled, it sends exactly two data points ONCE per process lifetime:
@@ -125,6 +146,11 @@ No user code, no environment variables, no PII, no IP address logging.
 export HYDRA_SANDBOX_TELEMETRY=1   # opt in
 export HYDRA_SANDBOX_NO_TELEMETRY=1  # explicitly opt out (default)
 ```
+
+## Acknowledgements
+
+Extracted from [Hydra RSI Core](https://github.com/akaradje/HYDRA_AGI_TECHNICAL),
+an experimental multi-agent AGI research framework.
 
 ## License
 

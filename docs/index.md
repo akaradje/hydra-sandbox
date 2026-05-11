@@ -1,4 +1,4 @@
-# hydra-sandbox
+# hydra-pysandbox
 
 Hardened Python execution sandbox for running untrusted code.
 
@@ -22,13 +22,13 @@ Python code without risking the host system.
 ## Installation
 
 ```bash
-pip install hydra-sandbox
+pip install hydra-pysandbox
 
 # With optional dependencies
-pip install hydra-sandbox[verify]    # Z3 formal verification
-pip install hydra-sandbox[seccomp]   # Linux seccomp support
-pip install hydra-sandbox[landlock]  # Linux landlock support
-pip install hydra-sandbox[all]       # everything
+pip install hydra-pysandbox[verify]    # Z3 formal verification
+pip install hydra-pysandbox[seccomp]   # Linux seccomp support
+pip install hydra-pysandbox[landlock]  # Linux landlock support
+pip install hydra-pysandbox[all]       # everything
 ```
 
 ## Quick example

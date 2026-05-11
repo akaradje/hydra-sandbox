@@ -1,7 +1,7 @@
 """
 Z3 formal verification tests.
 
-Requires ``hydra-sandbox[verify]``.  Entire file is skipped if z3
+Requires ``hydra-pysandbox[verify]``.  Entire file is skipped if z3
 is not installed.
 """
 
@@ -9,7 +9,7 @@ from __future__ import annotations
 
 import pytest
 
-pytest.importorskip("z3", reason="z3-solver not installed — pip install hydra-sandbox[verify]")
+pytest.importorskip("z3", reason="z3-solver not installed — pip install hydra-pysandbox[verify]")
 
 from z3 import Bool, Int, Ints, IntVal  # noqa: E402
 

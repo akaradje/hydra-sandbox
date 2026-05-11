@@ -1,5 +1,5 @@
 """
-hydra-sandbox — Hardened Python execution sandbox.
+hydra-pysandbox — Hardened Python execution sandbox.
 
 Provides isolated code execution with configurable strategies
 (subprocess, seccomp, landlock), import guarding, AST signature

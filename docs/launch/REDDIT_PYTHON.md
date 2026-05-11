@@ -2,7 +2,7 @@ r/Python: I built a hardened Python sandbox for running LLM-generated code
 
 Hey r/Python — over the past few months I've been extracting the sandbox
 module from a larger AGI research project into a standalone package. The
-result is hydra-sandbox, and I think it fills a gap in the ecosystem for
+result is hydra-pysandbox, and I think it fills a gap in the ecosystem for
 people building LLM tools.
 
 The problem: every LLM agent framework (LangChain, LlamaIndex, CrewAI)
@@ -11,10 +11,10 @@ subprocess.run() with zero isolation. That's dangerous even with
 "trusted" models — hallucinated imports, infinite loops, and accidental
 os.system calls happen all the time.
 
-What hydra-sandbox gives you:
+What hydra-pysandbox gives you:
 
 ```
-pip install hydra-sandbox
+pip install hydra-pysandbox
 ```
 
 ```python
@@ -54,5 +54,6 @@ Would this be useful in your projects? What would make you trust it for
 production? I'm particularly interested in feedback on the escape test
 suite — what other bypass vectors should I add?
 
+PyPI: https://pypi.org/project/hydra-pysandbox/
 Code: https://github.com/akaradje/hydra-sandbox
-Docs: https://akaradje.github.io/hydra-sandbox
+Docs: https://akaradje.github.io/hydra-pysandbox

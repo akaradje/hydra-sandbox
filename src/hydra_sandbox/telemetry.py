@@ -17,7 +17,7 @@ from urllib.error import URLError
 
 logger = logging.getLogger(__name__)
 
-_TELEMETRY_ENDPOINT = "https://telemetry.hydra-sandbox.dev/ping"
+_TELEMETRY_ENDPOINT = "https://telemetry.hydra-pysandbox.dev/ping"
 _SENT_FLAG = False
 
 

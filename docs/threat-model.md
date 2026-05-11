@@ -1,6 +1,6 @@
 # Threat Model
 
-## What hydra-sandbox protects against
+## What hydra-pysandbox protects against
 
 ### 1. Malicious imports
 The import guard blocks dangerous stdlib modules (`subprocess`, `ctypes`,

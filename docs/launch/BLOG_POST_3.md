@@ -4,7 +4,7 @@ LLM-generated code is unreliable. We know this. But what if you could
 mathematically prove that a generated function is correct before running
 it?
 
-hydra-sandbox integrates Z3, Microsoft's SMT solver, to check
+hydra-pysandbox integrates Z3, Microsoft's SMT solver, to check
 pre-conditions and post-conditions against generated code. Here's how
 it works.
 
@@ -34,7 +34,7 @@ If this formula is a tautology (always true), the function is correct
 for all valid inputs. If there's a counterexample, Z3 tells you exactly
 what input would break it.
 
-## Using hydra-sandbox's verified_execute
+## Using hydra-pysandbox's verified_execute
 
 The combined API makes this dead simple:
 
@@ -82,11 +82,11 @@ generated code. Instead of hoping the model got it right, you PROVE it.
 
 ## The Z3 integration is optional
 
-The base hydra-sandbox package has zero required dependencies. Z3
+The base hydra-pysandbox package has zero required dependencies. Z3
 verification is an optional extra:
 
 ```bash
-pip install hydra-sandbox[verify]
+pip install hydra-pysandbox[verify]
 ```
 
 Without it, verified_execute() still works — it just runs the code
@@ -125,5 +125,6 @@ and add verification later — no code changes needed.
 
 ---
 
-hydra-sandbox is MIT-licensed. pip install hydra-sandbox.
+hydra-pysandbox is MIT-licensed. pip install hydra-pysandbox.
+PyPI: https://pypi.org/project/hydra-pysandbox/
 github.com/akaradje/hydra-sandbox

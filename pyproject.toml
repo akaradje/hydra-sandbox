@@ -61,7 +61,7 @@ dev = [
 ]
 
 [project.scripts]
-hydra-sandbox = "hydra_sandbox.cli:main"
+hydra-pysandbox = "hydra_sandbox.cli:main"
 
 [project.urls]
 Homepage = "https://github.com/akaradje/hydra-sandbox"

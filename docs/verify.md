@@ -1,6 +1,6 @@
 # Z3 Formal Verification
 
-hydra-sandbox can mathematically prove properties of generated code
+hydra-pysandbox can mathematically prove properties of generated code
 using Z3, an SMT solver from Microsoft Research.
 
 ## Concepts
@@ -85,7 +85,7 @@ spec = {
 ## Installation
 
 ```bash
-pip install hydra-sandbox[verify]
+pip install hydra-pysandbox[verify]
 ```
 
 Without `[verify]`, calling `check_spec()` or `verified_execute()` with

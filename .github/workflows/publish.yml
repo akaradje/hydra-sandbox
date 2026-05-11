@@ -33,7 +33,7 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: pypi
-      url: https://pypi.org/project/hydra-sandbox/
+      url: https://pypi.org/project/hydra-pysandbox/
     permissions:
       id-token: write
     steps:

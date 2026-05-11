@@ -2,7 +2,7 @@
 
 Over the past few months, I extracted a sandbox module from a larger
 research project and turned it into a standalone PyPI package:
-hydra-sandbox.
+hydra-pysandbox.
 
 The goal: make running untrusted Python code as safe as possible without
 requiring Docker, a cloud VM, or a PhD in Linux security.
@@ -95,4 +95,6 @@ I'd love to hear from people building LLM tools: what would make you
 trust a sandbox for production? What features am I missing?
 
 The repo is at github.com/akaradje/hydra-sandbox. MIT license.
-pip install hydra-sandbox.
+pip install hydra-pysandbox.
+
+PyPI: https://pypi.org/project/hydra-pysandbox/
