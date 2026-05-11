@@ -1,0 +1,1 @@
+Show HN: Hydra Sandbox – run untrusted/LLM-generated Python safely (Z3 + 3-layer isolation)

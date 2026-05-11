@@ -1,0 +1,1 @@
+Safely run LLM-generated Python with 1 pip install — no Docker/cloud needed

@@ -1,0 +1,1 @@
+Replacement for LangChain's PythonREPL — adds import guard + resource limits + Z3 verification

@@ -1,0 +1,14 @@
+Hi HN! I built this after spending a week trying to safely execute LLM-generated Python in a production agent. Every solution I found was either a cloud service, required a full VM, or was just subprocess.run() with a timeout (which leaks env vars, allows network calls, and has no memory limits).
+
+hydra-pysandbox is a pure-Python package that gives you 3 isolation layers:
+1. Subprocess boundary (cross-platform)
+2. Import guard — blocks os.system, subprocess, ctypes, socket, etc.
+3. Resource limits via RLIMIT_CPU + RLIMIT_AS (POSIX)
+
+The unique part: optional Z3 SMT verification to prove a generated function is correct before executing it, and a Merkle audit trail for compliance use cases.
+
+Install: pip install hydra-pysandbox
+
+Tested against 20 known escape techniques (object traversal, hex-encoded imports, compile()+exec(), etc.) — ~85% blocked at subprocess level, 100% with seccomp on Linux.
+
+Extracted from a larger multi-agent research project. Happy to answer questions about the architecture, threat model, or the Z3 integration!

@@ -1,0 +1,57 @@
+I spent a week trying to safely run LLM-generated Python in production.
+
+subprocess.run() alone? Leaks env vars. Allows network. No memory limits. Won't stop a fork bomb.
+
+So I built hydra-pysandbox. 🧵
+---
+3-layer Python isolation:
+
+1️⃣ Subprocess boundary (cross-platform)
+2️⃣ Import guard — blocks os, subprocess, ctypes, socket
+3️⃣ RLIMIT_CPU + RLIMIT_AS (POSIX)
+
+pip install hydra-pysandbox
+---
+The unique part: ships with Z3 SMT verification.
+
+Prove your generated function is correct BEFORE executing it:
+
+result = verified_execute(
+    code,
+    spec={"pre":"x>=0","post":"result>=0"}
+)
+print(result.verification_valid)  # True
+---
+Also ships with a Merkle audit trail.
+
+Every execution is hash-chained. Tamper-evident. SOC 2 friendly.
+
+audit = AuditLog("audit.jsonl")
+audit.verify_chain()  # True/False
+---
+Tested against 20 known escape techniques:
+
+✗ __import__('os') — blocked
+✗ exec(bytes.fromhex(...)) — blocked
+✗ ().__class__.__base__.__subclasses__() — blocked
+
+~85% blocked at subprocess level.
+100% with seccomp on Linux.
+---
+Cross-platform. Zero required deps for core.
+
+Optional extras:
+• [verify] for Z3
+• [seccomp] for kernel isolation
+• [all] for everything
+
+pip install hydra-pysandbox[all]
+---
+Open source, MIT license.
+
+Extracted from Hydra RSI Core — a multi-agent AGI research framework.
+
+GitHub: https://github.com/akaradje/hydra-sandbox
+PyPI: https://pypi.org/project/hydra-pysandbox/
+
+Would love your feedback! 🙏
