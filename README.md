@@ -6,6 +6,8 @@
 [![License](https://img.shields.io/pypi/l/hydra-pysandbox.svg)](https://github.com/akaradje/hydra-sandbox/blob/main/LICENSE)
 [![Tests](https://img.shields.io/github/actions/workflow/status/akaradje/hydra-pysandbox/test.yml?label=tests)](https://github.com/akaradje/hydra-sandbox/actions)
 [![Coverage](https://img.shields.io/codecov/c/github/akaradje/hydra-pysandbox)](https://codecov.io/gh/akaradje/hydra-pysandbox)
+[![LangChain](https://img.shields.io/badge/LangChain-integrated-green.svg)](docs/integrations/langchain.md)
+[![LlamaIndex](https://img.shields.io/badge/LlamaIndex-integrated-green.svg)](docs/integrations/llamaindex.md)
 
 Hardened Python execution sandbox for running untrusted code.
 
