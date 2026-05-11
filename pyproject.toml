@@ -1,0 +1,104 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "hydra-sandbox"
+version = "0.1.0"
+description = "Hardened Python sandbox for running untrusted code — subprocess, seccomp, landlock strategies with Z3 formal verification."
+readme = "README.md"
+license = {text = "MIT"}
+authors = [
+    {name = "Hydra Sandbox Contributors"},
+]
+maintainers = [
+    {name = "Hydra Sandbox Contributors"},
+]
+keywords = [
+    "sandbox",
+    "security",
+    "llm",
+    "code-execution",
+    "seccomp",
+    "landlock",
+    "z3",
+    "formal-verification",
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: POSIX :: Linux",
+    "Operating System :: MacOS",
+    "Operating System :: Microsoft :: Windows",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Security",
+    "Topic :: Software Development :: Testing",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+requires-python = ">=3.10"
+dependencies = []
+
+[project.optional-dependencies]
+verify = ["z3-solver>=4.12.0"]
+seccomp = ["pyseccomp>=0.1"]
+landlock = ["landlock>=0.1"]
+all = [
+    "z3-solver>=4.12.0",
+    "pyseccomp>=0.1",
+    "landlock>=0.1",
+]
+dev = [
+    "pytest>=8.0.0",
+    "pytest-cov>=5.0.0",
+    "pytest-timeout>=2.0.0",
+    "pytest-benchmark>=4.0",
+    "ruff>=0.4.0",
+]
+
+[project.scripts]
+hydra-sandbox = "hydra_sandbox.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/akaradje/hydra-sandbox"
+Documentation = "https://github.com/akaradje/hydra-sandbox"
+Repository = "https://github.com/akaradje/hydra-sandbox.git"
+Issues = "https://github.com/akaradje/hydra-sandbox/issues"
+
+[tool.hatch.build]
+exclude = []
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/hydra_sandbox"]
+only-include = ["src/hydra_sandbox"]
+sources = ["src"]
+
+[tool.ruff]
+target-version = "py310"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "N", "UP", "B", "SIM", "C4"]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+timeout = 120
+addopts = "-v --tb=short"
+
+[tool.coverage.run]
+source = ["src/hydra_sandbox"]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "if TYPE_CHECKING:",
+    "raise NotImplementedError",
+]
