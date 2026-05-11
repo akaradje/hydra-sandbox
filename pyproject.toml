@@ -47,10 +47,14 @@ dependencies = []
 verify = ["z3-solver>=4.12.0"]
 seccomp = ["pyseccomp>=0.1"]
 landlock = ["landlock>=0.1"]
+langchain = ["langchain-core>=0.3"]
+llamaindex = ["llama-index-core>=0.11"]
 all = [
     "z3-solver>=4.12.0",
     "pyseccomp>=0.1",
     "landlock>=0.1",
+    "langchain-core>=0.3",
+    "llama-index-core>=0.11",
 ]
 dev = [
     "pytest>=8.0.0",
