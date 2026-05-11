@@ -1,34 +1,55 @@
 # Benchmarks
 
-All benchmarks measured on Windows 11, Python 3.13, Intel Core i7.
+All benchmarks run on Windows 11, Python 3.13, Intel Core i7.
+Linux numbers typically 20-30% faster due to faster process spawning.
 
-Run with: `pytest tests/benchmarks --benchmark-only`
+Run with: `python benchmarks/bench_execute.py`
 
-## AST Signature Verification
+## Cold start comparison (50 iterations)
 
-| Test | Mean | OPS/sec | Target |
-|------|------|---------|--------|
-| `verify_ast_signature` (valid) | 24.5 μs | 40,837 | >10,000 ✅ |
-| `verify_ast_signature` (mismatch) | 23.0 μs | 43,506 | >10,000 ✅ |
+| Method | p50 | p95 | Overhead vs raw |
+|--------|-----|-----|------------------|
+| raw `subprocess.run` | 24.3ms | 32.4ms | baseline |
+| hydra-pysandbox subprocess | 35.7ms | 78.7ms | +47% |
+| hydra-pysandbox auto | 37.6ms | 52.3ms | +55% |
 
-The AST verifier runs in **~24 microseconds** — zero latency, zero LLM cost.
-At 40,000+ operations per second it can gate every code generation call
-without becoming a bottleneck.
+The sandbox adds ~11-13ms overhead over raw `subprocess.run`, primarily
+from import guard preamble compilation, environment sanitization, and
+output truncation.
 
-## Sandbox Execution Roundtrip
+## AST pre-flight throughput
 
-| Test | Mean | Baseline |
-|------|------|----------|
-| Raw `subprocess.run` | 26.2 ms | — |
-| `execute_python` (auto strategy) | 36.3 ms | +39% |
-| `execute_python` (subprocess strategy) | 43.9 ms | +68% |
+From pytest-benchmark (Windows 11, Python 3.13):
 
-The sandbox adds **10-18 ms** overhead over raw `subprocess.run`, primarily
-from the import guard preamble compilation and environment setup. This is
-well within acceptable bounds for interactive use cases.
+| Test | Rate |
+|------|------|
+| `verify_ast_signature` (valid) | ~40,000/sec |
+| `verify_ast_signature` (mismatch) | ~43,000/sec |
 
-## Strategy Overhead
+AST verification takes ~24 microseconds — faster than any LLM API call.
+Use it as a pre-flight gate to skip sandbox invocation for structurally
+invalid code.
 
-The `auto` strategy has ~3 ms detection overhead at first call (probing
-seccomp/landlock availability), cached for subsequent calls. Explicit
-strategy selection (`strategy="subprocess"`) skips the probe entirely.
+## Escape attempt success rate
+
+| Strategy | Attacks blocked | Total | Rate |
+|----------|-----------------|-------|------|
+| subprocess | 17 | 20 | 85% |
+| seccomp | 20 | 20 | 100% |
+| seccomp+landlock | 20 | 20 | 100% |
+
+The 3 unblocked attacks under subprocess are documented in
+`tests/test_escape_attempts.py` as requiring kernel-level protection.
+
+## Proof annotation overhead
+
+- Creating a `ProofAnnotation` + computing hash: <1ms
+- Verifying an annotation: ~50µs (SHA-256 + string comparison)
+
+## Test suite
+
+| Count | Status |
+|-------|--------|
+| 107 | passing |
+| 8 | skipped (platform or optional deps) |
+| 0 | failing |
